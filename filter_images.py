@@ -12,7 +12,12 @@ from utils import get_id_classes, convert_from_color_segmentation
 def main():
   ## 
   ext = '.png'
-  class_names = ['bird', 'bottle', 'chair']
+  #class_names = ['bird', 'bottle', 'chair']
+  class_names = ['aeroplane',  	'bicycle',  	'bird',      	'boat', 
+		         'bottle',	    'bus', 		    'car',   	    'cat', 
+		         'chair',    	'cow', 	     	'diningtable', 	'dog', 
+		         'horse', 	    'motorbike',	'person', 	    'pottedplant', 
+		         'sheep', 	    'sofa',		    'train' , 	    'tvmonitor']
   ## 
 
   path, txt_file = process_arguments(sys.argv)
@@ -30,12 +35,12 @@ def main():
 
 def clear_class_logs(class_names):
   for c in class_names:
-    file_name = c + '.txt' 
+    file_name = 'list/' + c + '.txt' 
     if os.path.isfile(file_name):
       os.remove(file_name)
 
 def log_class(img_name, detected_class):
-  with open(detected_class + '.txt', 'ab') as f:
+  with open('list/' + detected_class + '.txt', 'ab') as f:
     print(img_name, file=f)
 
 def contain_class(img_name, class_ids, class_names):

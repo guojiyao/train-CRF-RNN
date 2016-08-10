@@ -18,7 +18,12 @@ def main():
   ##
   preprocess_mode = 'pad'
   im_sz = 500
-  class_names = ['bird', 'bottle', 'chair']
+  #class_names = ['bird', 'bottle', 'chair']
+  class_names = ['aeroplane',  	'bicycle',  	'bird',  	    'boat', 
+	             'bottle',	    'bus', 		    'car',  	    'cat', 
+	             'chair',  	    'cow', 		    'diningtable', 	'dog', 
+	             'horse', 	    'motorbike',	'person', 	    'pottedplant', 
+	             'sheep', 	    'sofa',		    'train' , 	    'tvmonitor']
   test_ratio = 0.1
   image_ext = '.jpg'
   label_ext = '.png'
@@ -77,7 +82,7 @@ def split_train_test_imgs(class_names, test_ratio):
   test_imgs = []
 
   for i in class_names:
-    file_name = i + '.txt' 
+    file_name = 'list/' + i + '.txt' 
     num_lines = get_num_lines(file_name)
     num_test_imgs = test_ratio * num_lines
     current_line = 1

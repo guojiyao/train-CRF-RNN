@@ -35,8 +35,8 @@ def interp_surgery(net, layers):
         net.params[l][0].data[range(m), range(k), :, :] = filt
 
 # base net -- the learned coarser model
-#base_weights = 'TVG_CRFRNN_COCO_VOC.caffemodel' # https://github.com/torrvision/crfasrnn/tree/master/python-scripts
-base_weights = 'fcn-8s-pascal.caffemodel' # https://gist.github.com/longjon/1bf3aa1e0b8e788d7e1d
+base_weights = 'TVG_CRFRNN_COCO_VOC.caffemodel' # https://github.com/torrvision/crfasrnn/tree/master/python-scripts
+# base_weights = 'fcn-8s-pascal.caffemodel' # https://gist.github.com/longjon/1bf3aa1e0b8e788d7e1d
 solver = caffe.SGDSolver('solver.prototxt')
 
 # do net surgery to set the deconvolution weights for bilinear interpolation
@@ -45,8 +45,10 @@ interp_surgery(solver.net, interp_layers)
 
 # copy base weights for fine-tuning
 solver.net.copy_from(base_weights)
-solver.net.set_mode_gpu()
-solver.net.set_device(0)
+caffe._caffe.set_mode_gpu()
+caffe._caffe.set_device(0)
+
+
 
 ## control layer's initialization
 halt_training = False
