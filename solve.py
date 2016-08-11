@@ -4,6 +4,7 @@
 from __future__ import division
 import sys
 import os
+import shutil
 import caffe
 import numpy as np
 import subprocess
@@ -38,6 +39,12 @@ def interp_surgery(net, layers):
 base_weights = 'TVG_CRFRNN_COCO_VOC.caffemodel' # https://github.com/torrvision/crfasrnn/tree/master/python-scripts
 # base_weights = 'fcn-8s-pascal.caffemodel' # https://gist.github.com/longjon/1bf3aa1e0b8e788d7e1d
 solver = caffe.SGDSolver('solver.prototxt')
+
+# make dir for solver states, snapshots, and caffemodels
+list_path = 'models/'
+if os.path.exists(list_path):
+  shutil.rmtree(list_path)
+os.mkdir(list_path)
 
 # do net surgery to set the deconvolution weights for bilinear interpolation
 interp_layers = [k for k in solver.net.params.keys() if 'up' in k or 'score2' in k or 'score4' in k]

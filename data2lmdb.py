@@ -19,11 +19,11 @@ def main():
   preprocess_mode = 'pad'
   im_sz = 500
   #class_names = ['bird', 'bottle', 'chair']
-  class_names = ['aeroplane',  	'bicycle',  	'bird',  	    'boat', 
-	             'bottle',	    'bus', 		    'car',  	    'cat', 
-	             'chair',  	    'cow', 		    'diningtable', 	'dog', 
-	             'horse', 	    'motorbike',	'person', 	    'pottedplant', 
-	             'sheep', 	    'sofa',		    'train' , 	    'tvmonitor']
+  class_names = ['aeroplane',   'bicycle',      'bird',         'boat', 
+                 'bottle',      'bus',          'car',          'cat', 
+                 'chair',       'cow',          'diningtable',  'dog', 
+                 'horse',       'motorbike',    'person',       'pottedplant', 
+                 'sheep',       'sofa',         'train',        'tvmonitor']
   test_ratio = 0.1
   image_ext = '.jpg'
   label_ext = '.png'
