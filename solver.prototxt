@@ -1,4 +1,4 @@
-net: "TVG_CRFRNN_COCO_VOC_TRAIN_3_CLASSES.prototxt"
+net: "TVG_CRFRNN_COCO_VOC_TRAIN.prototxt"
 
 test_iter: 261
 test_interval: 1333
