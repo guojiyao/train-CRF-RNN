@@ -1,20 +1,20 @@
 # Train CRF-RNN for Semantic Image Segmentation
 
-Martin Kersner, <m.kersner@gmail.com>
+Martin Kersner, <m.kersner@gmail.com>,
 
 modified by Fan Yang, <stoneyang0915@gmail.com>
 
-This repository contains Python scripts necessary for training [CRF-RNN for Semantic Image Segmentation](https://github.com/torrvision/crfasrnn) with 3 classes. 
+This repository contains Python scripts necessary for training [CRF-RNN for Semantic Image Segmentation](https://github.com/torrvision/crfasrnn) with 20 classes. 
 
 ```bash
 git clone --recursive https://github.com/martinkersner/train-CRF-RNN
 ```
 
 ## Prerequisites 
-In order to be able to train CRF-RNN you will need to build crfrnn version of caffe from the caffe directory. If not clone this repository with `--recursive`, one can clone it from [CRF-RNN](https://github.com/torrvision/crfasrnn).
+In order to be able to train CRF-RNN you will need to build crfrnn version of caffe from the caffe directory. If not clone this repository with `--recursive`, one can clone it from [here](https://github.com/bittnt/caffe).
 
 ## Prepare dataset for training
-First, you will need images with corresponding semantic labels. The easiest way is to employ [PASCAL VOC](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/index.html) dataset (!2GB) which provides those image/label pairs. Dataset consist of 21 different classes<sup>[1](#myfootnote1)</sup>, but in this example we will use only three of them in order to demonstrate training with different number classes than it was used in [original CRF-RNN](https://github.com/torrvision/crfasrnn).
+First, you will need images with corresponding semantic labels. The easiest way is to employ [PASCAL VOC](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/index.html) dataset (!2GB) which provides those image/label pairs. Dataset consist of 21 different classes<sup>[1](#myfootnote1)</sup>, but we treat the dataset without the background class.
 
 ### Download PASCAL VOC dataset
 ```bash
