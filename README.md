@@ -14,7 +14,7 @@ git clone --recursive https://github.com/stoneyang/train-CRF-RNN
 In order to be able to train CRF-RNN you will need to build crfrnn version of caffe from the caffe directory. If not clone this repository with `--recursive`, one can clone it from [here](https://github.com/bittnt/caffe).
 
 ## Prepare dataset for training
-First, you will need images with corresponding semantic labels. The easiest way is to employ [PASCAL VOC](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/index.html) dataset (!2GB) which provides those image/label pairs. Dataset consist of 21 different classes<sup>[1](#myfootnote1)</sup>, but we treat the dataset without the background class.
+First, you will need images with corresponding semantic labels. The easiest way is to employ [PASCAL VOC](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/index.html) dataset (!2GB) which provides those image/label pairs. **Dataset consist of 21 different classes<sup>[1](#myfootnote1)</sup>, but we treat the dataset without the background class.**
 
 ### Download PASCAL VOC dataset
 ```bash
@@ -41,7 +41,7 @@ Ground truth segmentations in PASCAL VOC 2012 dataset are defined as RGB images.
 python convert_labels.py labels/ list.txt converted_labels/ # OPTIONAL
 ```
 
-Then we decide which classes we are interested in and specify them in *filter_images.py* (on [line 15](https://github.com/stoneyang/train-CRF-RNN/blob/stoneyang/filter_images.py#L18) there is set the 20 classes). This script will create several text files (which list images containing our desired classes) named correspondingly to selected classes. Each file has the same structure as *list.txt*. In a case of experimenting with different classes it would be wise to generate those image list for all classes from dataset.
+Then we decide which classes we are interested in and specify them in *filter_images.py* (on [line 18](https://github.com/stoneyang/train-CRF-RNN/blob/stoneyang/filter_images.py#L18) there is set the 20 classes). This script will create several text files (which list images containing our desired classes) named correspondingly to selected classes. Each file has the same structure as *list.txt*. In a case of experimenting with different classes it would be wise to generate those image list for all classes from dataset.
 
 You should be aware that if an image label is composed from more than one class in which we are interested in, that image will be always assigned to a class with lower id. This behavior could potentionally cause a problem if dataset consists of many images with the same label couples. However, this doesn't count for *background* class.
 
@@ -56,7 +56,7 @@ python filter_images.py labels/ list.txt # in a case you DID NOT RUN convert_lab
 
 On [line 23](https://github.com/stoneyang/train-CRF-RNN/blob/stoneyang/data2lmdb.py#L23) we can set labels which we want to include into dataset.
 
-Within training we will regularly test our network's performance. Thus, besides the training data we will need a testing data. On [line 28](https://github.com/stoneyang/train-CRF-RNN/blob/stoneyang/data2lmdb.py#L23#L28) we can set a ratio (currently 0.1 == 10 percent of data) which denotes how much percent of data from whole dataset will be included in the test data. 
+Within training we will regularly test our network's performance. Thus, besides the training data we will need a testing data. On [line 28](https://github.com/stoneyang/train-CRF-RNN/blob/stoneyang/data2lmdb.py#L28) we can set a ratio (currently 0.1 == 10 percent of data) which denotes how much percent of data from whole dataset will be included in the test data. 
 
 Following command will create four directories with training/testing data for images/labels.
 
@@ -86,7 +86,7 @@ python loss_from_log.py train.log
 ## FAQ
 
 ### I don't want to train with 3 classes. What should I do?
-You have to generate lists of images for more or less classes. This is described in a paragraph above called *Split classes*. Afterward, you will also have to change prototxt description of network *TVG_CRFRNN_COCO_VOC_TRAIN_3_CLASSES.prototxt*. Each line in this file which contains text *CHANGED* should be modified. At each of those lines is *num_ouput: 4*, denoting 3 classes and background. 
+You have to generate lists of images for more or less classes. This is described in a paragraph above called *Split classes*. Afterward, you will also have to change prototxt description of network *TVG_CRFRNN_COCO_VOC_TRAIN_3_CLASSES.prototxt* (one can still fetch it from [here](https://github.com/martinkersner/train-CRF-RNN)). Each line in this file which contains text *CHANGED* should be modified. At each of those lines is *num_ouput: 4*, denoting 3 classes and background. 
 
 If you want to use for example 6 different classes, you should change parameter *num_ouput* at those lines to number 7. 
 
