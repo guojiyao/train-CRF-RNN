@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # Martin Kersner, m.kersner@gmail.com
 # 2016/01/18
+# Fan Yang, stoneyang0915@gmail.com
+# 2016/08/12
 
 from __future__ import print_function
 import os
@@ -18,7 +20,6 @@ def main():
   ##
   preprocess_mode = 'pad'
   im_sz = 500
-  #class_names = ['bird', 'bottle', 'chair']
   class_names = ['aeroplane',   'bicycle',      'bird',         'boat', 
                  'bottle',      'bus',          'car',          'cat', 
                  'chair',       'cow',          'diningtable',  'dog', 

@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # Martin Kersner, m.kersner@gmail.com
 # 2016/01/18
+# Fan Yang, stoneyang0915@gmail.com
+# 2016/08/12
 
 from __future__ import print_function
 import os
@@ -13,7 +15,6 @@ from utils import get_id_classes, convert_from_color_segmentation
 def main():
   ## 
   ext = '.png'
-  #class_names = ['bird', 'bottle', 'chair']
   class_names = ['aeroplane',   'bicycle',      'bird',         'boat', 
                  'bottle',      'bus',          'car',          'cat', 
                  'chair',       'cow',          'diningtable',  'dog', 

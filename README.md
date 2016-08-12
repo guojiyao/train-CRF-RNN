@@ -7,7 +7,7 @@ modified by Fan Yang, <stoneyang0915@gmail.com>
 This repository contains Python scripts necessary for training [CRF-RNN for Semantic Image Segmentation](https://github.com/torrvision/crfasrnn) with 20 classes. 
 
 ```bash
-git clone --recursive https://github.com/martinkersner/train-CRF-RNN
+git clone --recursive https://github.com/stoneyang/train-CRF-RNN
 ```
 
 ## Prerequisites 
@@ -41,7 +41,7 @@ Ground truth segmentations in PASCAL VOC 2012 dataset are defined as RGB images.
 python convert_labels.py labels/ list.txt converted_labels/ # OPTIONAL
 ```
 
-Then we decide which classes we are interested in and specify them in *filter_images.py* (on [line 15](https://github.com/martinkersner/train-CRF-RNN/blob/master/filter_images.py#L15) there is set *bird*, *bottle* and *chair* class). This script will create several text files (which list images containing our desired classes) named correspondingly to selected classes. Each file has the same structure as *list.txt*. In a case of experimenting with different classes it would be wise to generate those image list for all classes from dataset.
+Then we decide which classes we are interested in and specify them in *filter_images.py* (on [line 15](https://github.com/stoneyang/train-CRF-RNN/blob/stoneyang/filter_images.py#L18) there is set the 20 classes). This script will create several text files (which list images containing our desired classes) named correspondingly to selected classes. Each file has the same structure as *list.txt*. In a case of experimenting with different classes it would be wise to generate those image list for all classes from dataset.
 
 You should be aware that if an image label is composed from more than one class in which we are interested in, that image will be always assigned to a class with lower id. This behavior could potentionally cause a problem if dataset consists of many images with the same label couples. However, this doesn't count for *background* class.
 
@@ -52,11 +52,11 @@ python filter_images.py labels/ list.txt # in a case you DID NOT RUN convert_lab
 
 
 ### Create LMDB database
-[Original CRF-RNN](https://github.com/torrvision/crfasrnn) used for training images with size 500x500 px and we will do so as well. But if, for whatever reason, one would decide for different dimensions<sup>[3](#myfootnote3)</sup> it can be changed on [line 20](https://github.com/martinkersner/train-CRF-RNN/blob/master/data2lmdb.py#L20) of *data2lmdb.py*. Currently, we expect that the larger side in no more than 500 px. Because images/labels don't always correspond to required dimensions, we padd them with zeros in order to obtain right image/label size.
+[Original CRF-RNN](https://github.com/torrvision/crfasrnn) used for training images with size 500x500 px and we will do so as well. But if, for whatever reason, one would decide for different dimensions<sup>[3](#myfootnote3)</sup> it can be changed on [line 22](https://github.com/stoneyang/train-CRF-RNN/blob/stoneyang/data2lmdb.py#L22) of *data2lmdb.py*. Currently, we expect that the larger side in no more than 500 px. Because images/labels don't always correspond to required dimensions, we padd them with zeros in order to obtain right image/label size.
 
-On [line 21](https://github.com/martinkersner/train-CRF-RNN/blob/master/data2lmdb.py#L21) we can set labels which we want to include into dataset.
+On [line 23](https://github.com/stoneyang/train-CRF-RNN/blob/stoneyang/data2lmdb.py#L23) we can set labels which we want to include into dataset.
 
-Within training we will regularly test our network's performance. Thus, besides the training data we will need a testing data. On [line 22](https://github.com/martinkersner/train-CRF-RNN/blob/master/data2lmdb.py#L22) we can set a ratio (currently 0.1 == 10 percent of data) which denotes how much percent of data from whole dataset will be included in the test data. 
+Within training we will regularly test our network's performance. Thus, besides the training data we will need a testing data. On [line 28](https://github.com/stoneyang/train-CRF-RNN/blob/stoneyang/data2lmdb.py#L23#L28) we can set a ratio (currently 0.1 == 10 percent of data) which denotes how much percent of data from whole dataset will be included in the test data. 
 
 Following command will create four directories with training/testing data for images/labels.
 

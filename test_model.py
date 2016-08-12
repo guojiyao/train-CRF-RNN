@@ -15,7 +15,6 @@ def main():
 
   prototxt = 'TVG_CRFRNN_COCO_VOC_TEST.prototxt'
   caffemodel = 'models/train_iter_{}.caffemodel'
-  # class_names = ['bird', 'bottle', 'chair']
   class_names = ['aeroplane',   'bicycle',      'bird',         'boat', 
                  'bottle',      'bus',          'car',          'cat', 
                  'chair',       'cow',          'diningtable',  'dog', 
