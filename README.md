@@ -2,6 +2,8 @@
 
 Martin Kersner, <m.kersner@gmail.com>
 
+modified by Fan Yang, <stoneyang0915@gmail.com>
+
 This repository contains Python scripts necessary for training [CRF-RNN for Semantic Image Segmentation](https://github.com/torrvision/crfasrnn) with 3 classes. 
 
 ```bash
@@ -9,7 +11,7 @@ git clone --recursive https://github.com/martinkersner/train-CRF-RNN
 ```
 
 ## Prerequisites 
-In order to be able to train CRF-RNN you will need to install caffe from [CRF-RNN](https://github.com/torrvision/crfasrnn).
+In order to be able to train CRF-RNN you will need to build crfrnn version of caffe from the caffe directory. If not clone this repository with `--recursive`, one can clone it from [CRF-RNN](https://github.com/torrvision/crfasrnn).
 
 ## Prepare dataset for training
 First, you will need images with corresponding semantic labels. The easiest way is to employ [PASCAL VOC](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/index.html) dataset (!2GB) which provides those image/label pairs. Dataset consist of 21 different classes<sup>[1](#myfootnote1)</sup>, but in this example we will use only three of them in order to demonstrate training with different number classes than it was used in [original CRF-RNN](https://github.com/torrvision/crfasrnn).
@@ -28,24 +30,24 @@ ln -s $DATASETS/VOCdevkit/VOC2012/JPEGImages images
 ```
 
 ### Split classes
-In the next step we have to select only images that contain classes (in our case 3) for which we want to train our semantic segmentation algorithm. At first we create a list of all images that can be exploited for segmentation. 
+In the next step we have to select only images that contain classes (in our case 20, you can also remain 3 as the original version configured) for which we want to train our semantic segmentation algorithm. At first we create a list of all images that can be exploited for segmentation. 
 
 ```bash
-find labels/ -printf '%f\n' | sed 's/\.png//'  | tail -n +2 > train.txt
+find labels/ -printf '%f\n' | sed 's/\.png//'  | tail -n +2 > list.txt
 ```
 Ground truth segmentations in PASCAL VOC 2012 dataset are defined as RGB images. However, if you decide to use different dataset or already preprocessed segmentations, you could be working with gray-level ones whose values exactly correspondent to label indexes in documentation. Because the workflow of creating dataset for training is separated to several parts, we access some images twice. In a case that we are working with unpreprocessed ground truth segmentations, we would have to perform conversion twice. Unfortunately, this conversion is rather time consuming (~2s), therefore we suggest to run following command first. It is not mandatory though.
 
 ```bash
-python convert_labels.py labels/ train.txt converted_labels/ # OPTIONAL
+python convert_labels.py labels/ list.txt converted_labels/ # OPTIONAL
 ```
 
-Then we decide which classes we are interested in and specify them in *filter_images.py* (on [line 15](https://github.com/martinkersner/train-CRF-RNN/blob/master/filter_images.py#L15) there is set *bird*, *bottle* and *chair* class). This script will create several text files (which list images containing our desired classes) named correspondingly to selected classes. Each file has the same structure as *train.txt*. In a case of experimenting with different classes it would be wise to generate those image list for all classes from dataset.
+Then we decide which classes we are interested in and specify them in *filter_images.py* (on [line 15](https://github.com/martinkersner/train-CRF-RNN/blob/master/filter_images.py#L15) there is set *bird*, *bottle* and *chair* class). This script will create several text files (which list images containing our desired classes) named correspondingly to selected classes. Each file has the same structure as *list.txt*. In a case of experimenting with different classes it would be wise to generate those image list for all classes from dataset.
 
 You should be aware that if an image label is composed from more than one class in which we are interested in, that image will be always assigned to a class with lower id. This behavior could potentionally cause a problem if dataset consists of many images with the same label couples. However, this doesn't count for *background* class.
 
 ```bash
-python filter_images.py labels/ train.txt # in a case you DID NOT RUN convert_labels.py script
-#python filter_images.py converted_labels/ train.txt # you RUN convert_labels.py script
+python filter_images.py labels/ list.txt # in a case you DID NOT RUN convert_labels.py script
+#python filter_images.py converted_labels/ list.txt # you RUN convert_labels.py script
 ```
 
 
