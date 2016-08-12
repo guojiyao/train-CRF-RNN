@@ -1,3 +1,6 @@
 [submodule "py_img_seg_eval"]
 	path = py_img_seg_eval
 	url = https://github.com/stoneyang/py_img_seg_eval.git
+[submodule "caffe"]
+	path = caffe
+	url = https://github.com/bittnt/caffe.git
