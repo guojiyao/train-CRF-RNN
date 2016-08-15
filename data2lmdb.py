@@ -83,7 +83,7 @@ def split_train_test_imgs(class_names, test_ratio):
   test_imgs = []
 
   for i in class_names:
-    file_name = 'list/' + i + '.txt' 
+    file_name = 'lists/' + i + '.txt' 
     num_lines = get_num_lines(file_name)
     num_test_imgs = test_ratio * num_lines
     current_line = 1

@@ -46,8 +46,8 @@ Then we decide which classes we are interested in and specify them in *filter_im
 You should be aware that if an image label is composed from more than one class in which we are interested in, that image will be always assigned to a class with lower id. This behavior could potentionally cause a problem if dataset consists of many images with the same label couples. However, this doesn't count for *background* class.
 
 ```bash
-python filter_images.py labels/ list.txt # in a case you DID NOT RUN convert_labels.py script
-#python filter_images.py converted_labels/ list.txt # you RUN convert_labels.py script
+python filter_images.py labels/ list.txt lists/ # in a case you DID NOT RUN convert_labels.py script
+#python filter_images.py converted_labels/ list.txt lists/ # you RUN convert_labels.py script
 ```
 
 
