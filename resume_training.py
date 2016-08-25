@@ -13,7 +13,7 @@ def main():
   solver_state = 'models/train_iter_{}.solverstate'.format(iter_num)
 
   solver = caffe.SGDSolver('solver.prototxt')
-  solver.solve(solver_state) # load even *.caffemodel
+  solver.restore(solver_state) # load even *.caffemodel
 
   solver.net.set_mode_gpu()
   solver.net.set_device(0)
