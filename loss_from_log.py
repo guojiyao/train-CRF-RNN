@@ -36,7 +36,7 @@ def main():
         # TRAIN NET
         if strstr(line, 'Iteration') and strstr(line, 'lr'):
           matched = match_iteration(line)
-          train_iteration.append(int(matched.group(1))+base_train_iter)
+          train_iteration.append(int(matched.group(1)))
 
         elif strstr(line, 'Train net output'):
           matched = match_loss(line)
@@ -62,7 +62,7 @@ def main():
         # TEST NET
         elif strstr(line, 'Testing net'):
           matched = match_iteration(line)
-          test_iteration.append(int(matched.group(1))+base_test_iter)
+          test_iteration.append(int(matched.group(1)))
 
         elif strstr(line, 'Test net output'):
           matched = match_loss(line)
