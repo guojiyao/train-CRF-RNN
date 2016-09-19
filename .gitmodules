@@ -2,3 +2,6 @@
 	path = py_img_seg_eval
 	url = https://github.com/stoneyang/py_img_seg_eval.git
 
+[submodule "crfasrnn"]
+	path = crfasrnn
+	url = https://github.com/hyenal/crfasrnn.git
